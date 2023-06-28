@@ -1,0 +1,52 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+.big01 {margin-top: 154px;}
+
+i.fa-solid.fa-eye {
+    position: absolute;
+    top: 24%;
+    right: 6%;
+    z-index: 1;
+    color: #0000009e;
+}
+
+.pass {
+    position: relative;
+}
+
+i.fa-solid.fa-arrow-left {
+    font-size: 35px;
+    padding-top: 28px;
+}
+
+.logout a.nav-link {
+    margin-left: 40px;
+}
+
+.register {
+    text-align: center;
+    padding: 15px 0px;
+}
+input.btn.btn-primary {
+    margin: auto;
+    display: block;
+    font-size: 17px;
+    padding: 6px 30px;
+}
+button.btn.btn-primary {
+    margin: auto;
+    display: block;
+    padding: 5px 32px;
+    font-size: 19px;
+    font-family: cursive;
+    
+}
+
+h2 {
+    padding: 33px 0px;
+    font-size: 51px;
+    font-family: cursive;
+    margin-top: 16px;
+}
