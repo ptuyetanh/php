@@ -3,7 +3,7 @@
    require_once './conn.php';
    
    $page = isset($_POST['page']) ? intval($_POST['page']) : 1;
-   $limit = 13; // Giới hạn dữ liệu trên mỗi trang
+   $limit = 8; // Giới hạn dữ liệu trên mỗi trang
    $offset = ($page - 1) * $limit; // Tính từ bản ghi số bao nhiêu
    $offset = max(0, $offset); // Đảm bảo OFFSET không nhỏ hơn 0
    
@@ -65,13 +65,15 @@ try{
                   id: id,
                },
                success: function (response) {
-                  $('.id').val(response.id);
-                  $('.fullnames').val(response.fullname);
-                  $('.email').val(response.email);
-                  $('.password').val(response.password);
-                  $('.address').val(response.address);
-                  $('.gender').val(response.gender);
-                  $('#modalUpdate').modal('show');
+                  if(response.success){
+                     $('.id').val(response.data.id);
+                     $('.fullnames').val(response.data.fullname);
+                     $('.email').val(response.data.email);
+                     $('.password').val(response.data.password);
+                     $('.address').val(response.data.address);
+                     $('.gender').val(response.data.gender);
+                     $('#modalUpdate').modal('show');
+                  }
                }
             });
          }
@@ -98,38 +100,6 @@ try{
                }
             });
          }
-         // $(document).ready(function () {
-         //    function loadTable() {
-         //       $.ajax({
-         //          url: 'view.php',
-         //          method: 'GET',
-         //          success: function (response) {
-         //             $('#Table tbody').html(response);
-         //          }
-         //       });
-         //    }
-         //    $('.btndelete').click(function (e) {
-         //       var id = $(this).data('id');
-
-         //       if (confirm("Bạn có chắc chắn muốn xóa?")) {
-         //          var row = $(this).closest('tr');
-         //          var confirmationDialog = $(this).closest('.confirmation-dialog');
-
-         //          confirmationDialog.hide(); // Ẩn hộp thoại xác nhận
-         //          $.ajax({
-         //             method: 'POST',
-         //             url: 'delete.php',
-         //             data: {
-         //                id: id
-         //             },
-         //             success: function (response) {
-         //                row.hide();
-         //                loadTable();
-         //             }
-         //          });
-         //       }
-         //    });
-         // });
       </script>
    </td>
 </tr>

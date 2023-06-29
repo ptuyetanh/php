@@ -277,8 +277,6 @@
                         <div class="col-md-12">
                             Bạn có muốn xóa không?
                         </div>
-
-
                         <input type="hidden" class="id" id="id" name="id" value="">
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -289,8 +287,7 @@
             </div>
         </div>
     </div>
-    <!-- Phân trang -->
-
+    <!-- delete -->
     <script src="./js/ajax.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">

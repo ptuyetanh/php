@@ -30,7 +30,7 @@ $(document).ready(function () {
         }
         });
     }
-    //insert
+//insert
     $('#formInsert').submit(function(e){
        e.preventDefault();
       var fullname = $('#fullname').val();
