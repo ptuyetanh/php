@@ -20,6 +20,10 @@ button.btn.btn-primary.btn-lg {
 button {
     border: none;
 }
+
+button.btn-close {
+    font-size: 11px;
+}
 i.fa-solid.fa-delete-left {
     background-color: #dc3545f0;
     color: white;
@@ -42,5 +46,5 @@ thead {background-color: aliceblue;text-align: center;color: #00000082;}
 }
 
 .container.text-center {
-    padding: 40px 0px;
+    padding: 24px 0px;
 }

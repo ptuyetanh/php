@@ -52,7 +52,6 @@
             </div>
         </div>
     </nav>
-
     <div class="container text-center">
         <div class="row">
             <div class="col-sm-12">
@@ -69,11 +68,6 @@
                     data-bs-target="#modalInsert">
                     Tạo mới
                 </button>
-                <?php 
-                 if(isset($_GET['error'])){
-                    echo "<p style='color:red'> {$_GET['error']} </p>";
-                }
-                ?>
                 <!-- Modal -->
                 <div class="modal fade" id="modalInsert" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"
                     aria-hidden="true">
@@ -199,11 +193,54 @@
                         // });
                     });
                 </script>
-            
+
+            </div>
         </div>
     </div>
-    </div>
     <!-- end table  -->
+    <div class="modal fade" id="modalUpdate" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitleId">Cập nhập tài khoản</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                </div>
+                <div class="modal-body">
+                    <form method="post" id="formUpdate" class="row g-3 needs-validation">
+                        <div class="col-md-4">
+                            <label for="validationCustom01" class="form-label fullname">Fullname</label>
+                            <input type="text" class="form-control fullnames" name="fullname" id="fullname" value=""
+                                required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="validationCustom02" class="form-label">Address</label>
+                            <input type="text" class="form-control address" id="address" name="address" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="validationCustom02" class="form-label"> Gender</label>
+                            <input id="gender" type="text" class="form-control gender" name="gender" required>
+                        </div>
+                        <div class="col-md-7">
+                            <label for="validationCustom03" class="form-label">Email</label>
+                            <input type="text" class="form-control email" id="email" name="email" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="validationCustom03" class="form-label">Password</label>
+                            <input type="text" class="form-control password" id="password" name="password" required>
+                        </div>
+                        <input type="hidden" class="id" id="id" name="id" value="">
+                        <div class="col-12 text-center  modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button class="btn btn-primary" type="submit">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end modal update -->
     <!-- Phân trang -->
     <div id="pagination">
         <div class="container">
@@ -212,7 +249,7 @@
                     <nav aria-label="Page navigation example">
                         <ul class="pagination pagination-sm">
                             <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous" data-page="">
+                                <a class="page-link" href="#" aria-label="Previous" data-page=""">
                                     <span aria-hidden="true">Previous</span>
                                 </a>
                             </li>
@@ -229,11 +266,11 @@
             </div>
         </div>
     </div>
-        <!-- end pagination  -->
-        <script src="./js/ajax.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-        </script>
+    <!-- end pagination  -->
+    <script src="./js/ajax.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
 </body>
 
 </html>

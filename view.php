@@ -38,49 +38,7 @@ try{
    <td class="text-center">
       <button class="btn1 btnupdate" type="button" data-bs-toggle="modal" data-bs-target="#modalUpdate"
          data-id="<?php echo $row['ID']; ?>"><i class="fa-solid fa-pen-to-square"></i></button>
-      <div class="modal fade" id="modalUpdate" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"
-         aria-hidden="true">
-         <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <h5 class="modal-title" id="modalTitleId">Cập nhập tài khoản</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
-               </div>
-               <div class="modal-body">
-                  <form method="post" id="formUpdate" class="row g-3 needs-validation">
-                     <div class="col-md-4">
-                        <label for="validationCustom01" class="form-label">Fullname</label>
-                        <input type="text" class="form-control" name="fullname" id="fullname"
-                           value="<?php echo $row['Fullname']; ?>" required>
-                     </div>
-                     <div class="col-md-4">
-                        <label for="validationCustom02" class="form-label">Address</label>
-                        <input id="address" type="text" class="form-control" name="address" required>
-                     </div>
-                     <div class="col-md-4">
-                        <label for="validationCustom02" class="form-label"> Gender</label>
-                        <input id="gender" type="text" class="form-control" name="gender" required>
-                     </div>
-                     <div class="col-md-7">
-                        <label for="validationCustom03" class="form-label">Email</label>
-                        <input type="text" class="form-control" id="email" name="email" required>
-                     </div>
-                     <div class="col-md-4">
-                        <label for="validationCustom03" class="form-label">Password</label>
-                        <input type="text" class="form-control" id="password" name="password" required>
-                     </div>
-                     <input type="hidden" id="id" name="id" value="">
-                     <div class="col-12 text-center  modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button class="btn btn-primary" type="submit">Update</button>
-                     </div>
-                  </form>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- update -->
+      
       <script>
          function loadTable() {
             $.ajax({
@@ -91,55 +49,33 @@ try{
                }
             });
          }
-         $('.btnupdate').click(function (e) {
+         $('.btnupdate').click(function(e){
             var id = $(this).data('id');
-            $('#id').val(id); // Gán giá trị ID vào trường input ẩn
+            $('#id').val(id);
+            userID(id);
+            //$('#formUpdate').modal('show');
+         });
+         function userID(id){
+   
             $.ajax({
                method: "post",
                url: "userID.php",
                data: {
                   id: id,
                },
-               success: function (data) {
-                  if (data.success) {
-                     var user = data.user;
-                     $('#id').val(user.id);
-                     $('#fullname').val(user.fullname);
-                     $('#email').val(user.email);
-                     $('#password').val(user.password);
-                     $('#address').val(user.address);
-                     $('#gender').val(user.gender);
-                     $('#modalUpdate').modal('show');
+               success: function (response) {
+                  if (response.success) {
+                     $('.id').val(response.data.id);
+                     $('.fullname').val(response.data.fullname);
+                     $('.email').val(response.data.email);
+                     $('.password').val(response.data.password);
+                     $('.address').val(response.data.address);
+                     $('.gender').val(response.data.gender);
+                     $('.modalUpdate').modal('show');
                   }
                }
             });
-         });
-         $('#formUpdate').submit(function (e) {
-            e.preventDefault();
-            var id = $('#id').val(); // Lấy giá trị ID từ trường input ẩn
-            var fullname = $('#fullname').val();
-            var email = $('#email').val();
-            var password = $('#password').val();
-            var address = $('#address').val();
-            var gender = $('#gender').val();
-            $.ajax({
-               method: "POST",
-               url: "update.php?id=" + id,
-               data: {
-                  id: id, // Bao gồm giá trị ID trong đối tượng dữ liệu
-                  fullname: fullname,
-                  email: email,
-                  password: password,
-                  address: address,
-                  gender: gender,
-               },
-               success: function (data) {
-                  alert(data);
-                  $("#modalUpdate").modal('hide');
-                  loadTable();
-               }
-            });
-         });
+         }
       </script>
       <!-- end update -->
       <button class="btn1 btndelete" type="button" data-id="<?php echo $row['ID']; ?>"><i
@@ -191,6 +127,5 @@ try{
    echo "Error: " . $e->getMessage();
 }
 
-   
 
 ?>
