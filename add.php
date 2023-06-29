@@ -10,7 +10,17 @@ if($_SERVER['REQUEST_METHOD']==='POST' && isset($_SERVER['HTTP_X_REQUESTED_WITH'
         $address = $_POST['address'];
         $gender = $_POST['gender'];
         $ID='';
-        $stmt = $conn->prepare("SELECT * FROM users where Email= :email");
+        //xử lí token
+        //Lấy token từ header
+        $token = $_SERVER['HTTP_X_CSRF_TOKEN'];
+        $stmt = $conn->prepare("SELECT * FROM tokens where token = :token");
+        $stmt->bindParam(':token', $token);
+        $stmt->execute();
+        $tokenExists = $stmt->fetch();
+        if(!$tokenExists){
+            die('Token không hợp lệ');
+        }else{
+            $stmt = $conn->prepare("SELECT * FROM users where Email= :email");
     
         $stmt->bindParam(':email',$email);
         $stmt->execute();
@@ -41,6 +51,9 @@ if($_SERVER['REQUEST_METHOD']==='POST' && isset($_SERVER['HTTP_X_REQUESTED_WITH'
             //header("Location: admin.php?success=$success");
     
         }
+        }
+
+        
     }catch(PDOException $e){
        echo  $e->getMessage();
     }

@@ -18,6 +18,14 @@
                 $stmt->bindColumn('role', $role);
                 if ($stmt->fetch(PDO::FETCH_BOUND)) {
                     if (password_verify($pass, $resultPassword)) {
+                        //Lưu token csdl
+                        $token = bin2hex(random_bytes(32));
+                        $stmt = $conn->prepare('INSERT INTO tokens(token) VALUES (:token)');
+                        $stmt->bindParam(':token', $token);
+                        $stmt = $stmt->execute();
+                        //Lưu token vào cookie và session
+                        setCookie('token',$token,time()+3600,'/');
+                        $_SESSION['token'] = $token;
                         if( $role == 0){
                             $_SESSION['isloginOK'] = $resultID;
                             header("location:index.php");

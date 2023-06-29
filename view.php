@@ -3,7 +3,7 @@
    require_once './conn.php';
    
    $page = isset($_POST['page']) ? intval($_POST['page']) : 1;
-   $limit = 6; // Giới hạn dữ liệu trên mỗi trang
+   $limit = 13; // Giới hạn dữ liệu trên mỗi trang
    $offset = ($page - 1) * $limit; // Tính từ bản ghi số bao nhiêu
    $offset = max(0, $offset); // Đảm bảo OFFSET không nhỏ hơn 0
    
@@ -55,6 +55,7 @@ try{
             userID(id);
             //$('#formUpdate').modal('show');
          });
+         
          function userID(id){
    
             $.ajax({
@@ -64,55 +65,71 @@ try{
                   id: id,
                },
                success: function (response) {
-                  if (response.success) {
-                     $('.id').val(response.data.id);
-                     $('.fullname').val(response.data.fullname);
-                     $('.email').val(response.data.email);
-                     $('.password').val(response.data.password);
-                     $('.address').val(response.data.address);
-                     $('.gender').val(response.data.gender);
-                     $('.modalUpdate').modal('show');
-                  }
+                  $('.id').val(response.id);
+                  $('.fullnames').val(response.fullname);
+                  $('.email').val(response.email);
+                  $('.password').val(response.password);
+                  $('.address').val(response.address);
+                  $('.gender').val(response.gender);
+                  $('#modalUpdate').modal('show');
                }
             });
          }
       </script>
       <!-- end update -->
-      <button class="btn1 btndelete" type="button" data-id="<?php echo $row['ID']; ?>"><i
+      <button class="btn1 btndelete" type="button" data-bs-toggle="modal" data-bs-target="#modalDelete" data-id="<?php echo $row['ID']; ?>"><i
             class="fa-solid fa-delete-left"></i></button>
       <script>
-         $(document).ready(function () {
-            function loadTable() {
-               $.ajax({
-                  url: 'view.php',
-                  method: 'GET',
-                  success: function (response) {
-                     $('#Table tbody').html(response);
-                  }
-               });
-            }
-            $('.btndelete').click(function (e) {
-               var id = $(this).data('id');
-
-               if (confirm("Bạn có chắc chắn muốn xóa?")) {
-                  var row = $(this).closest('tr');
-                  var confirmationDialog = $(this).closest('.confirmation-dialog');
-
-                  confirmationDialog.hide(); // Ẩn hộp thoại xác nhận
-                  $.ajax({
-                     method: 'POST',
-                     url: 'delete.php',
-                     data: {
-                        id: id
-                     },
-                     success: function (response) {
-                        row.hide();
-                        loadTable();
-                     }
-                  });
+         $('.btndelete').click(function(e){
+            var id = $(this).data('id');
+            $('#id').val(id);
+            userDelete(id);
+            //$('#formDelete').modal('show');
+         });
+         function userDelete(id){
+            $.ajax({
+               method: "post",
+               url: "userID.php",
+               data: {
+                  id:id,
+               },
+               success: function (data) {
+                  
                }
             });
-         });
+         }
+         // $(document).ready(function () {
+         //    function loadTable() {
+         //       $.ajax({
+         //          url: 'view.php',
+         //          method: 'GET',
+         //          success: function (response) {
+         //             $('#Table tbody').html(response);
+         //          }
+         //       });
+         //    }
+         //    $('.btndelete').click(function (e) {
+         //       var id = $(this).data('id');
+
+         //       if (confirm("Bạn có chắc chắn muốn xóa?")) {
+         //          var row = $(this).closest('tr');
+         //          var confirmationDialog = $(this).closest('.confirmation-dialog');
+
+         //          confirmationDialog.hide(); // Ẩn hộp thoại xác nhận
+         //          $.ajax({
+         //             method: 'POST',
+         //             url: 'delete.php',
+         //             data: {
+         //                id: id
+         //             },
+         //             success: function (response) {
+         //                row.hide();
+         //                loadTable();
+         //             }
+         //          });
+         //       }
+         //    });
+         // });
       </script>
    </td>
 </tr>

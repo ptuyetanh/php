@@ -9,7 +9,17 @@ $(document).ready(function () {
         }
     })
 });
-//insert
+function getCookie(name) {
+    var cookieArr = document.cookie.split(';');
+    for(var i=0; i<cookieArr.length; i++) {
+        var cookiePair = cookieArr[i].split('=');
+        if(name === cookiePair[0].trim()){
+            return decodeURIComponent(cookiePair[1])
+        }
+    }
+    return null;
+}
+
 $(document).ready(function () {
     function loadTable() {
         $.ajax({
@@ -20,6 +30,7 @@ $(document).ready(function () {
         }
         });
     }
+    //insert
     $('#formInsert').submit(function(e){
        e.preventDefault();
       var fullname = $('#fullname').val();
@@ -27,8 +38,10 @@ $(document).ready(function () {
       var password = $('#pass').val();
       var address = $('#address').val();
       var gender = $('#gender').val(); 
+      var token = getCookie('token') || '<?php echo $_SESSION["token"]; ?>';
       $.ajax({
         method: 'POST',
+        headers: {'X-CSRF-token': token},
         url: "add.php",
         data: {
             fullname:fullname,
@@ -45,6 +58,7 @@ $(document).ready(function () {
         });
     });
 });
+// Update 
 $(document).ready(function () {
     $('#formUpdate').submit(function (e) {
         e.preventDefault();
@@ -54,8 +68,10 @@ $(document).ready(function () {
         var email = $('.email').val();
         var address = $('.address').val();
         var gender = $('.gender').val();
+        var token = getCookie('token') || '<?php echo $_SESSION["token"]; ?>';
         $.ajax({
            method: "POST",
+           headers: {'X-CSRF-token': token},
            url: "update.php?id=" + id,
            data: {
               id: id, // Bao gồm giá trị ID trong đối tượng dữ liệu
@@ -71,8 +87,30 @@ $(document).ready(function () {
               loadTable();
            }
         });
-     });
+    });
 });
+//Delete
+$(document).ready(function () {
+    $('#formDelete').submit(function(e){
+        e.preventDefault();
+        var id = $('#id').val();
+        var token = getCookie('token') || '<?php echo $_SESSION["token"]; ?>';
+        $.ajax({
+            method: "post",
+            headers: {'X-CSRF-token': token},
+            url: "delete.php",
+            data: {
+                id:id,
+            },
+            success: function (data) {
+              alert(data);
+              $("#modalDelete").modal('hide');
+              loadTable();
+            }
+        });
+    })
+});
+
 
 
 
