@@ -3,6 +3,26 @@
     margin: 0;
 }
 
+.search button.btn.btn-primary {
+    height: 38px;
+    background-color: white;
+    color: black;
+    border: 1px solid #0000003d;
+}
+
+.search {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+input.btn-page {
+    padding: 5px 13px;
+    margin-right: 3px;
+    background-color: white;
+    border: 1px solid #00000047;
+    border-radius: 4px;
+}
+
 button.btn1 {
     margin-left: 7px;
     background: none;

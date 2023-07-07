@@ -44,7 +44,7 @@
                  }else {
                     $error = "Dữ liệu không khớp";
                     header("location: login.php?error=" . urlencode($error));
-                     $conn = null;
+                    $conn = null;
                     exit();
                 }
              } else {

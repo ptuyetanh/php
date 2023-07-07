@@ -9,7 +9,8 @@ $stmt = $conn->prepare($query);
 $stmt->bindParam(':id', $id);
 $stmt->execute();
 $output['data'] = $stmt->fetch();
-
+header('Content-Type: application/json');
+echo json_encode($output);
 // Return the user data as JSON response
 // if ($user) {
 //   $response = array('success' => true, 'user' => $user);

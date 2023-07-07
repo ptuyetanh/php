@@ -1,14 +1,3 @@
-// viewdata
-$(document).ready(function () {
-    $.ajax({
-        url:"view.php",
-        type:"POST",
-        cache:false,
-        success:function (data){
-            $('#tbody01').html(data);
-        }
-    })
-});
 function getCookie(name) {
     var cookieArr = document.cookie.split(';');
     for(var i=0; i<cookieArr.length; i++) {
